@@ -1,5 +1,5 @@
 // 文件上传
-jQuery(function () {
+jQuery(function() {
     var $ = jQuery,
         $list = $('#thelist'),
         $btn = $('#ctlBtn'),
@@ -33,7 +33,7 @@ jQuery(function () {
     });
 
     // 当有文件被添加进队列的时候
-    uploader.on('fileQueued', function (file) {
+    uploader.on('fileQueued', function(file) {
         var fileType = file.type;
         alert(fileType);
         alert(fileType.indexOf("isdmage"))
@@ -51,18 +51,18 @@ jQuery(function () {
         // 创建缩略图
         // 如果为非图片文件，可以不用调用此方法。
         // thumbnailWidth x thumbnailHeight 为 100 x 100
-        uploader.makeThumb(file, function (error, src) {
-            // if (error) {
-            //     $img.replaceWith('<span>不能预览</span>');
-            //     return;
-            // }
+        uploader.makeThumb(file, function(error, src) {
+            if (error) {
+                // $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
 
             $img.attr('src', src);
         }, thumbnailWidth, thumbnailHeight);
     });
 
     // 文件上传过程中创建进度条实时显示。
-    uploader.on('uploadProgress', function (file, percentage) {
+    uploader.on('uploadProgress', function(file, percentage) {
         var $li = $('#' + file.id),
             $percent = $li.find('.progress .progress-bar');
 
@@ -79,12 +79,12 @@ jQuery(function () {
         $percent.css('width', percentage * 100 + '%');
     });
 
-    uploader.on('uploadSuccess', function (file) {
+    uploader.on('uploadSuccess', function(file) {
         $('#' + file.id).find('p.state').text('已上传');
     });
 
     // 判断文件是否上传成功
-    uploader.on('uploadAccept', function (file, response) {
+    uploader.on('uploadAccept', function(file, response) {
         if (response.success == 1) {
             // 通过return true或false来告诉组件，此文件上传成功或失败。
             return response.msg;
@@ -93,15 +93,15 @@ jQuery(function () {
         }
     });
 
-    uploader.on('uploadError', function (file) {
+    uploader.on('uploadError', function(file) {
         $('#' + file.id).find('p.state').text('上传出错');
     });
 
-    uploader.on('uploadComplete', function (file) {
+    uploader.on('uploadComplete', function(file) {
         $('#' + file.id).find('.progress').fadeOut();
     });
 
-    uploader.on('all', function (type) {
+    uploader.on('all', function(type) {
         if (type === 'startUpload') {
             state = 'uploading';
         } else if (type === 'stopUpload') {
@@ -117,7 +117,7 @@ jQuery(function () {
         }
     });
 
-    $btn.on('click', function () {
+    $btn.on('click', function() {
         if (state === 'uploading') {
             uploader.stop(true);
         } else {
