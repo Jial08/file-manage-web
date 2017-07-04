@@ -10,7 +10,7 @@ jQuery(function() {
         thumbnailWidth = 100 * ratio,
         thumbnailHeight = 100 * ratio,
         uploader,
-        chunkSize = 5 * 1024 * 1024;
+        chunkSize = 5 * 1024 * 1024; // 上传分块儿大小
 
     // WebUploader的hook接口
     WebUploader.Uploader.register({
